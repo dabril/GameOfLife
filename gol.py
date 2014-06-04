@@ -115,6 +115,23 @@ def startingAcorn(lifeDict):
     lifeDict[x, y] = 1
     return lifeDict
 
+def startingDiehard(lifeDict):
+    """ Other starting potini:  Acorn 
+    """
+    x = CELLWIDTH / 2
+    y = CELLHEIGHT / 2
+
+    #Diehard
+    lifeDict[x - 3, y] = 1
+    lifeDict[x - 2, y] = 1
+    lifeDict[x - 2, y + 1] = 1
+    lifeDict[x + 2, y + 1] = 1
+    lifeDict[x + 3, y + 1] = 1
+    lifeDict[x + 4, y + 1] = 1
+    lifeDict[x + 3, y - 1] = 1
+    return lifeDict
+
+
 def colourGrid(item, lifeDict):
     """ Colorize alive cells """
     x = item[0]
@@ -183,7 +200,8 @@ def main():
     lifeDict = blankGrid() #Creating an empty board
     #lifeDict = startingGridRandom(lifeDict) #Assign random life
     #lifeDict = startingRPentomino(lifeDict) #Assign R-pentomino life
-    lifeDict = startingAcorn(lifeDict) #Assign Acorn life
+    #lifeDict = startingAcorn(lifeDict) #Assign Acorn life
+    lifeDict = startingDiehard(lifeDict) #Assign Acorn life
     
     for item in lifeDict:
         colourGrid(item, lifeDict) #colorize board alive cells
