@@ -18,12 +18,12 @@
 #
 #1. Any live cell with fewer than two live neighbours dies, as if caused by
 #under-population. 
-#2. Any live cell with two or three live neighbours lives on
-#to the next generation. 
-#3. Any live cell with more than three live neighbours
-#dies, as if by overcrowding. 
-#4. Any dead cell with exactly three live
-#neighbours becomes a live cell, as if by reproduction.
+#2. Any live cell with two or three live neighbours lives on to the next
+#generation. 
+#3. Any live cell with more than three live neighbours dies, as if by
+#overcrowding. 
+#4. Any dead cell with exactly three live neighbours becomes a live cell, as if
+#by reproduction.
 # 
 # NOTES: Tutorial extracted from trevorappleton.blogspot.co.uk
 # --> http://trevorappleton.blogspot.co.uk/2013/07/python-game-of-life.html 
@@ -51,8 +51,14 @@ WHITE =    (255,255,255)
 DARKGRAY = (40, 40, 40)
 
 def drawGrid():
-    """ Draw he Grid """
+    """ Draw a Grid """
+    for x in range(0, WINDOWWIDTH, CELLSIZE): #drawing vertical lines
+        #                             color     init    end
+        pygame.draw.line(DISPLAYSURF, DARKGRAY, (x,0), (x, WINDOWHEIGHT))
 
+    for y in range(0, WINDOWHEIGHT, CELLSIZE): #drawing horizontal lines
+        #                             color     init    end
+        pygame.draw.line(DISPLAYSURF, DARKGRAY, (0,y), (WINDOWWIDTH, y))
 
 
 def main():
