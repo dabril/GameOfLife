@@ -50,6 +50,7 @@ CELLHEIGHT = WINDOWHEIGHT / CELLSIZE # Number of cells high
 BLACK =    (0,  0,  0)
 WHITE =    (255,255,255)
 DARKGRAY = (40, 40, 40)
+GREEN = (0, 255, 0)
 
 def drawGrid():
     """ Draw a Grid """
@@ -80,6 +81,24 @@ def startingGridRandom(lifeDict):
         lifeDict[item] = random.randint(0, 1) #assign randomly 0 or 1
     return lifeDict
 
+def colourGrid(item, lifeDict):
+    """ Colorize alive cells """
+    x = item[0]
+    y = item[1]
+
+    x = x * CELLSIZE # translates array into grid size
+    y = y * CELLSIZE # translates array into grid size
+    
+    if lifeDict[item] == 0: #died cells
+        #draw a white rectangle
+        pygame.draw.rect(DISPLAYSURF, WHITE, (x, y, CELLSIZE, CELLSIZE))
+
+    if lifeDict[item] == 1: #alive cells
+        #draw a green rectangle
+        pygame.draw.rect(DISPLAYSURF, GREEN, (x, y, CELLSIZE, CELLSIZE))
+
+    return None
+
 def main():
     
     pygame.init()
@@ -90,6 +109,9 @@ def main():
     DISPLAYSURF.fill(WHITE) #fills the screen white
     lifeDict = blankGrid() #Creating an empty board
     lifeDict = startingGridRandom(lifeDict) #Assign random life
+    
+    for item in lifeDict:
+        colourGrid(item, lifeDict) #colorize board alive cells
 
     drawGrid() #draw the game grid
     pygame.display.update() #update the screen
