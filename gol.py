@@ -85,6 +85,21 @@ def startingGridRandom(lifeDict):
         lifeDict[item] = random.randint(0, 1) #assign randomly 0 or 1
     return lifeDict
 
+def startingRPentomino(lifeDict):
+    """ Other starting potini:  R-pentomino 
+    """
+    x = CELLWIDTH / 2
+    y = CELLHEIGHT / 2
+
+    #R-pentomino
+    lifeDict[x, y - 1] = 1
+    lifeDict[x + 1, y - 1] = 1
+    lifeDict[x - 1, y] = 1
+    lifeDict[x, y] = 1
+    lifeDict[x, y + 1] = 1
+    return lifeDict
+
+
 def colourGrid(item, lifeDict):
     """ Colorize alive cells """
     x = item[0]
@@ -151,7 +166,8 @@ def main():
     
     DISPLAYSURF.fill(WHITE) #fills the screen white
     lifeDict = blankGrid() #Creating an empty board
-    lifeDict = startingGridRandom(lifeDict) #Assign random life
+    #lifeDict = startingGridRandom(lifeDict) #Assign random life
+    lifeDict = startingRPentomino(lifeDict) #Assign R-pentomino life
     
     for item in lifeDict:
         colourGrid(item, lifeDict) #colorize board alive cells
