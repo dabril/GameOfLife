@@ -102,7 +102,7 @@ def colourGrid(item, lifeDict):
 
 def getNeighbours(item, lifeDict):
     """ Geti how many the neighbours has a cell """
-    neighbours = 0
+    neighbours = -1
 
     for x in range(-1, 2):
         for y in range(-1, 2):
@@ -110,10 +110,7 @@ def getNeighbours(item, lifeDict):
             if (checkCell[0] < CELLWIDTH and checkCell[0] >= 0 and checkCell[1]
                     < CELLHEIGHT and checkCell[1] >= 0):
                 if lifeDict[checkCell] == 1:
-                    if x == 0 and y == 0: # negate the central cell
-                        neighbours += 0
-                    else:
-                        neighbours += 1
+                    neighbours += 1
     return neighbours
 
 
