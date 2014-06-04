@@ -113,6 +113,26 @@ def getNeighbours(item, lifeDict):
                     neighbours += 1
     return neighbours
 
+def tick(lifeDict):
+    """ Generation evolution """
+    newTick = {}
+
+    for item in lifeDict:
+        numNeighbours = getNeighbours(item, lifeDict) #get number of neighbours
+        if lifeDict[item] == 1: #alive cells
+            if numNeighbours < 2 or numNeighbours > 3:
+                #surrounding population < 2  or surrounding population > 3
+                newTick[item] = 0 #cell dies
+            else: #surrounding population = {2,3}
+                newTick[item] = 1 #cell is still alive 
+        elif lifeDict[item] == 0: #died cell
+            if numNeighbours == 3: #reproduction
+                newTick[item] = 1 #new cell created/resurrected 
+            else:
+                newTick[item] = 0 #cell still dead
+
+    return newTick
+
 
 def main():
     
