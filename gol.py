@@ -99,6 +99,21 @@ def startingRPentomino(lifeDict):
     lifeDict[x, y + 1] = 1
     return lifeDict
 
+def startingAcorn(lifeDict):
+    """ Other starting potini:  Acorn 
+    """
+    x = CELLWIDTH / 2
+    y = CELLHEIGHT / 2
+
+    #Acorn
+    lifeDict[x - 3, y + 1] = 1
+    lifeDict[x - 2, y + 1] = 1
+    lifeDict[x + 1, y + 1] = 1
+    lifeDict[x + 2, y + 1] = 1
+    lifeDict[x + 3, y + 1] = 1
+    lifeDict[x - 2, y - 1] = 1
+    lifeDict[x, y] = 1
+    return lifeDict
 
 def colourGrid(item, lifeDict):
     """ Colorize alive cells """
@@ -167,7 +182,8 @@ def main():
     DISPLAYSURF.fill(WHITE) #fills the screen white
     lifeDict = blankGrid() #Creating an empty board
     #lifeDict = startingGridRandom(lifeDict) #Assign random life
-    lifeDict = startingRPentomino(lifeDict) #Assign R-pentomino life
+    #lifeDict = startingRPentomino(lifeDict) #Assign R-pentomino life
+    lifeDict = startingAcorn(lifeDict) #Assign Acorn life
     
     for item in lifeDict:
         colourGrid(item, lifeDict) #colorize board alive cells
