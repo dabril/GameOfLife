@@ -38,8 +38,8 @@ WINDOWWIDTH = 640
 WINDOWHEIGHT = 480
 CELLSIZE = 10 #Size of Cells
 
-assert WINDOWWIDTH % CELLSIZE == 0, """window width must be a multiple of 
-cell size"""
+assert WINDOWWIDTH % CELLSIZE == 0, """window width must be a multiple of cell
+size"""
 assert WINDOWHEIGHT % CELLSIZE == 0, """window height must be a multiple of
 cell size"""
 
@@ -48,12 +48,14 @@ CELLHEIGHT = WINDOWHEIGHT / CELLSIZE # Number of cells high
 
 # set up the colours
 BLACK =    (0,  0,  0)
-WHITE =    (255,255,255)
+WHITE =    (240, 240, 240)
 DARKGRAY = (40, 40, 40)
 GREEN = (0, 255, 0)
 
 #Updating time
-FPS = 10
+#FPS = 61
+MSEC = 200
+
 def drawGrid():
     """ Draw a Grid """
     for x in range(0, WINDOWWIDTH, CELLSIZE): #drawing vertical lines
@@ -104,7 +106,7 @@ def colourGrid(item, lifeDict):
 
 def getNeighbours(item, lifeDict):
     """ Geti how many the neighbours has a cell """
-    neighbours = -1
+    neighbours = 0
 
     for x in range(-1, 2):
         for y in range(-1, 2):
@@ -112,7 +114,10 @@ def getNeighbours(item, lifeDict):
             if (checkCell[0] < CELLWIDTH and checkCell[0] >= 0 and checkCell[1]
                     < CELLHEIGHT and checkCell[1] >= 0):
                 if lifeDict[checkCell] == 1:
-                    neighbours += 1
+                    if x == 0 and y == 0: 
+                        neighbours += 0
+                    else:
+                        neighbours += 1
     return neighbours
 
 def tick(lifeDict):
@@ -140,7 +145,7 @@ def main():
     
     pygame.init()
     global DISPLAYSURF
-    FPSCLOCK = pygame.time.Clock() #controls time
+    #FPSCLOCK = pygame.time.Clock() #controls time
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH,WINDOWHEIGHT)) 
     pygame.display.set_caption('Game Of Life') 
     
@@ -156,7 +161,8 @@ def main():
 
     while True: #main game loop
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if (event.type == QUIT or (event.type==KEYDOWN and
+                event.key==K_ESCAPE)):
                 pygame.quit()
                 sys.exit()
 
@@ -169,8 +175,8 @@ def main():
 
         drawGrid() #draw the game grid
         pygame.display.update()
-        
-        FPSCLOCK.tick(FPS)
+        #FPSCLOCK.tick(FPS)
+        pygame.time.delay(MSEC)
 
 
 if __name__=='__main__':
