@@ -131,6 +131,60 @@ def startingDiehard(lifeDict):
     lifeDict[x + 3, y - 1] = 1
     return lifeDict
 
+def startingGosperGliderGun(lifeDict):
+    """ Other starting potini:  Gosper Glider Gun
+    """
+
+    x = CELLWIDTH / 2
+    y = CELLHEIGHT / 2
+
+    #Gosper Glider Gun
+
+    #left square
+    lifeDict[x - 12, y] = 1
+    lifeDict[x - 12, y + 1] = 1
+    lifeDict[x - 11, y] = 1
+    lifeDict[x - 11, y + 1] = 1
+
+    #left part of gun
+    lifeDict[x - 2, y] = 1
+    lifeDict[x - 2, y + 1] = 1
+    lifeDict[x - 2, y + 2] = 1
+    lifeDict[x - 1, y - 1] = 1
+    lifeDict[x - 1, y + 3] = 1
+    lifeDict[x, y - 2] = 1
+    lifeDict[x + 1, y - 2] = 1
+    lifeDict[x, y + 4] = 1
+    lifeDict[x + 1, y + 4] = 1
+    lifeDict[x + 2, y + 1] = 1
+    lifeDict[x + 3, y - 1] = 1
+    lifeDict[x + 3, y + 3] = 1
+    lifeDict[x + 4, y] = 1
+    lifeDict[x + 4, y + 1] = 1
+    lifeDict[x + 4, y + 2] = 1
+    lifeDict[x + 5, y + 1] = 1
+
+    #right part of gun
+    lifeDict[x + 8, y - 2] = 1
+    lifeDict[x + 8, y - 1] = 1
+    lifeDict[x + 8, y] = 1
+    lifeDict[x + 9, y - 2] = 1
+    lifeDict[x + 9, y - 1] = 1
+    lifeDict[x + 9, y] = 1
+    lifeDict[x + 10, y - 3] = 1
+    lifeDict[x + 10, y + 1] = 1
+    lifeDict[x + 12, y - 4] = 1
+    lifeDict[x + 12, y - 3] = 1
+    lifeDict[x + 12, y + 1] = 1
+    lifeDict[x + 12, y + 2] = 1
+
+    #right square
+    lifeDict[x + 22, y - 2] = 1
+    lifeDict[x + 22, y - 1] = 1
+    lifeDict[x + 23, y - 2] = 1
+    lifeDict[x + 23, y - 1] = 1
+
+    return lifeDict
 
 def colourGrid(item, lifeDict):
     """ Colorize alive cells """
@@ -201,7 +255,8 @@ def main():
     #lifeDict = startingGridRandom(lifeDict) #Assign random life
     #lifeDict = startingRPentomino(lifeDict) #Assign R-pentomino life
     #lifeDict = startingAcorn(lifeDict) #Assign Acorn life
-    lifeDict = startingDiehard(lifeDict) #Assign Acorn life
+    #lifeDict = startingDiehard(lifeDict) #Assign Acorn life
+    lifeDict = startingGosperGliderGun(lifeDict) #Assign Acorn life
     
     for item in lifeDict:
         colourGrid(item, lifeDict) #colorize board alive cells
