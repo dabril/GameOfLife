@@ -60,6 +60,18 @@ def drawGrid():
         #                             color     init    end
         pygame.draw.line(DISPLAYSURF, DARKGRAY, (0,y), (WINDOWWIDTH, y))
 
+def blankGrid():
+    """Create an empty dictionary representing an empty board (no cells):
+    -> Board representation:
+        #1 - cell alive
+        #0 - cell died
+    """
+    gridDict = {}
+    for y in range(CELLHEIGHT):
+        for x in range(CELLWIDTH):
+            gridDict[x,y]=0
+    return gridDict
+
 
 def main():
     
@@ -69,6 +81,8 @@ def main():
     pygame.display.set_caption('Game Of Life') 
     
     DISPLAYSURF.fill(WHITE) #fills the screen white
+    lifeDict = blankGrid() #Creating an empty board
+
     drawGrid() #draw the game grid
     pygame.display.update() #update the screen
 
