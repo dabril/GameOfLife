@@ -31,6 +31,7 @@
 
 import pygame, sys
 from pygame.locals import *
+import random
 
 #Gloabl variables for window size
 WINDOWWIDTH = 640
@@ -72,6 +73,12 @@ def blankGrid():
             gridDict[x,y]=0
     return gridDict
 
+def startingGridRandom(lifeDict):
+    """ Assign 0 or 1 to our cells by modifying the board grid dictionary"""
+    
+    for item in lifeDict:
+        lifeDict[item] = random.randint(0, 1) #assign randomly 0 or 1
+    return lifeDict
 
 def main():
     
@@ -82,6 +89,7 @@ def main():
     
     DISPLAYSURF.fill(WHITE) #fills the screen white
     lifeDict = blankGrid() #Creating an empty board
+    lifeDict = startingGridRandom(lifeDict) #Assign random life
 
     drawGrid() #draw the game grid
     pygame.display.update() #update the screen
