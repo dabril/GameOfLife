@@ -52,6 +52,8 @@ WHITE =    (255,255,255)
 DARKGRAY = (40, 40, 40)
 GREEN = (0, 255, 0)
 
+#Updating time
+FPS = 10
 def drawGrid():
     """ Draw a Grid """
     for x in range(0, WINDOWWIDTH, CELLSIZE): #drawing vertical lines
@@ -138,6 +140,7 @@ def main():
     
     pygame.init()
     global DISPLAYSURF
+    FPSCLOCK = pygame.time.Clock() #controls time
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH,WINDOWHEIGHT)) 
     pygame.display.set_caption('Game Of Life') 
     
@@ -156,8 +159,18 @@ def main():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+
+        #retuns a tick/generation
+        lifeDict = tick(lifeDict)
+
+        #colouring the live cells, white the dead
+        for item in lifeDict:
+            colourGrid(item, lifeDict) #colorize board alive cells
+
         drawGrid() #draw the game grid
         pygame.display.update()
+        
+        FPSCLOCK.tick(FPS)
 
 
 if __name__=='__main__':
