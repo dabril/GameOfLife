@@ -2,7 +2,7 @@
 
 Python code: Conway's Game of Life 
 
-Daniel Abrill
+Daniel Abril
 
 ---
 Conway's Game of Life -> http://en.wikipedia.org/wiki/Conway's_Game_of_Life
