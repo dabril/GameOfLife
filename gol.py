@@ -32,6 +32,8 @@
 import pygame, sys
 from pygame.locals import *
 import random
+import sys, getopt
+
 
 #Gloabl variables for window size
 WINDOWWIDTH = 640
@@ -243,7 +245,29 @@ def tick(lifeDict):
 
 
 def main():
-    
+
+    #Starting populations
+    STARTDIC = {'R': startingGridRandom, 'P': startingRPentomino, 'A': startingAcorn, 'D': startingDiehard, 'G': startingGosperGliderGun}
+
+    try:
+        opts, args = getopt.getopt(sys.argv[1:],"hs:",["starting="])
+    except getopt.GetoptError:
+        print srt(err)
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if opt == '-h':
+            print 'test.py -s <StartingMode={R,P,A,D,G}>'
+            sys.exit()
+        elif opt in ("-s", "--starting"):
+            if arg in STARTDIC:
+                startingMode = STARTDIC[arg] 
+            else:
+                print 'test.py -s <StartingMode={R,P,A,D,G}>'
+                sys.exit()
+
+    print 'Starting Mode set', str(startingMode)
+
     pygame.init()
     global DISPLAYSURF
     #FPSCLOCK = pygame.time.Clock() #controls time
@@ -256,7 +280,8 @@ def main():
     #lifeDict = startingRPentomino(lifeDict) #Assign R-pentomino life
     #lifeDict = startingAcorn(lifeDict) #Assign Acorn life
     #lifeDict = startingDiehard(lifeDict) #Assign Acorn life
-    lifeDict = startingGosperGliderGun(lifeDict) #Assign Acorn life
+    #lifeDict = startingGosperGliderGun(lifeDict) #Assign Acorn life
+    lifeDict = startingMode(lifeDict)
     
     for item in lifeDict:
         colourGrid(item, lifeDict) #colorize board alive cells
